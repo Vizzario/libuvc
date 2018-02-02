@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.8)
 project(libuvc)
 
 if (NOT CMAKE_BUILD_TYPE)
@@ -26,6 +26,10 @@ if(WIN32)
 
   find_path(LIBUSB_INCLUDE_DIR libusb-1.0/libusb.h
   PATHS /opt/local/include)
+
+elseif(APPLE)
+  find_library(LIBUSB_LIBRARIES usb-1.0)
+  find_path(LIBUSB_INCLUDE_DIR libusb-1.0/libusb.h)
 else()
   find_package(PkgConfig)
   pkg_check_modules(LIBUSB libusb-1.0)
